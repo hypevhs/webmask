@@ -4,14 +4,15 @@ import ReactDOM from 'react-dom';
 class Canvas extends Component {
   constructor(props) {
     super(props);
-    this.state = { sqrX: 100 };
-    this.handleClick = this.handleClick.bind(this);
     this.repaint = this.repaint.bind(this);
   }
 
   render() {
     return (
-      <canvas width="320" height="240" style={{border: "1px solid black"}} onClick={this.handleClick}>Canvas not supported.</canvas>
+      <canvas
+        width={this.props.image.width}
+        height={this.props.image.height}
+        style={{border: "1px solid black"}}>Canvas not supported.</canvas>
     );
   }
 
@@ -28,15 +29,9 @@ class Canvas extends Component {
     this.repaint(ctx);
   }
 
-  handleClick() {
-    this.setState({ sqrX: this.state.sqrX + 10 });
-  }
-
   repaint(ctx) {
     ctx.save();
-    ctx.translate(this.state.sqrX, 100);
-    ctx.fillStyle = '#F00';
-    ctx.fillRect(-50, -50, 100, 100);
+    ctx.drawImage(this.props.image, 0, 0);
     ctx.restore();
   }
 }
