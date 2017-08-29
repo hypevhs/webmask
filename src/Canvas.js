@@ -32,7 +32,16 @@ class Canvas extends Component {
   repaint(ctx) {
     ctx.save();
     ctx.drawImage(this.props.image, 0, 0);
+    this.applyMasks();
     ctx.restore();
+  }
+
+  applyMasks() {
+    if (this.props.masks && this.props.masks.length) {
+      console.log(`Applying ${this.props.masks.length} masks.`);
+    } else {
+      console.log("Applying no masks.");
+    }
   }
 }
 

@@ -1,6 +1,3 @@
-
-
-
 import React, { Component } from 'react';
 import Canvas from "./Canvas.js";
 import RectangleSelector from "./RectangleSelector.js"
@@ -16,7 +13,7 @@ class CanvasSet extends Component {
       }}>
         <Canvas
           image={this.props.image}
-          masks={this.props.operations} />
+          masks={this.props.masks} />
         <RectangleSelector
           width={this.props.image.naturalWidth || 640}
           height={this.props.image.naturalHeight || 480}

@@ -29,7 +29,7 @@ class App extends Component {
         <Toolbar />
         <CanvasSet
           image={this.state.image}
-          operations={[]}
+          masks={this.state.masks}
           onSetSelection={this.onSetSelection}
         />
         <TestImage setImage={this.setImage} />
