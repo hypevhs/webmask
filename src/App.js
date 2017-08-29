@@ -38,7 +38,8 @@ class App extends Component {
             image={this.state.image}
             masks={this.state.operations} />
           <RectangleSelector
-            image={this.state.image}
+            width={this.state.image.naturalWidth || 640}
+            height={this.state.image.naturalHeight || 480}
             onSetSelection={this.onSetSelection} />
         </div>
         <TestImage setImage={this.setImage} />

@@ -26,8 +26,8 @@ class RectangleSelector extends Component {
   render() {
     return (
       <canvas
-        width={this.props.image.naturalWidth || 640}
-        height={this.props.image.naturalHeight || 480}
+        width={this.props.width}
+        height={this.props.height}
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
         onMouseMove={this.onMouseMove}
@@ -74,7 +74,6 @@ class RectangleSelector extends Component {
   onMouseUp(e) {
     this.setState({ dragging: false });
     var xywh = this.getRealSelect();
-    console.log(xywh);
     // pass active selection range to parent
     this.props.onSetSelection(xywh);
     e.preventDefault();
