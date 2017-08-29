@@ -49,9 +49,19 @@ class RectangleSelector extends Component {
 
   repaint(ctx) {
     ctx.save();
-    ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+    ctx.translate(0.5, 0.5); // fixes line thickness, but breaks line dashes!
+    ctx.lineWidth = 1;
     var xywh = this.getRealSelect();
-    ctx.fillRect(xywh.x, xywh.y, xywh.w, xywh.h);
+    ctx.setLineDash([4,6]);
+
+    ctx.strokeStyle = "black";
+    ctx.lineDashOffset = 0;
+    ctx.strokeRect(xywh.x, xywh.y, xywh.w, xywh.h);
+
+    ctx.strokeStyle = "white";
+    ctx.lineDashOffset = 5;
+    ctx.strokeRect(xywh.x, xywh.y, xywh.w, xywh.h);
+
     ctx.restore();
   }
 
@@ -75,7 +85,7 @@ class RectangleSelector extends Component {
       return { x:0,y:0,w:0,h:0 };
     }
 
-    // ensure that coords are all positive, in case of a bottom-right to top-left selection
+    // ensure that coords are all positive, in case of a BotRight-to-TopLeft (aka "backwards") selection
     var x = Math.min(this.state.x1, this.state.x2);
     var y = Math.min(this.state.y1, this.state.y2);
     var x2 = Math.max(this.state.x1, this.state.x2);
@@ -102,7 +112,7 @@ class RectangleSelector extends Component {
     var rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
     var localX = e.clientX - rect.left;
     var localY = e.clientY - rect.top;
-    localX += 0.1; // corner case where selection start is ON a 8x8 gridline, breaking backwards selections
+    localX += 0.1; // corner case where selection start is ON a 8x8 gridline, breaking the floor/ceil for backwards selections
     localY += 0.1; // FIXME: bug or feature ??
     return { x: localX, y: localY };
   }
