@@ -15,12 +15,15 @@ class RectangleSelector extends Component {
       y1: 0,
       x2: 0,
       y2: 0,
-      dragging: false
+      dragging: false,
+      antsId: 0,
+      antsOffset: 0
     };
 
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
+    this.antsUpdate = this.antsUpdate.bind(this);
   }
 
   render() {
@@ -39,12 +42,17 @@ class RectangleSelector extends Component {
     console.log('mount');
     var ctx = ReactDOM.findDOMNode(this).getContext('2d');
     this.repaint(ctx);
+    this.antsUpdate();
   }
 
   componentDidUpdate() {
     var ctx = ReactDOM.findDOMNode(this).getContext('2d');
     ctx.clearRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
     this.repaint(ctx);
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.state.antsId);
   }
 
   repaint(ctx) {
@@ -55,11 +63,11 @@ class RectangleSelector extends Component {
     ctx.setLineDash([4,6]);
 
     ctx.strokeStyle = "black";
-    ctx.lineDashOffset = 0;
+    ctx.lineDashOffset = 0+this.state.antsOffset;
     ctx.strokeRect(xywh.x, xywh.y, xywh.w, xywh.h);
 
     ctx.strokeStyle = "white";
-    ctx.lineDashOffset = 5;
+    ctx.lineDashOffset = 5+this.state.antsOffset;
     ctx.strokeRect(xywh.x, xywh.y, xywh.w, xywh.h);
 
     ctx.restore();
@@ -123,6 +131,16 @@ class RectangleSelector extends Component {
 
   blockCeil(n) {
     return Math.ceil(n / 8) * 8;
+  }
+
+  antsUpdate() {
+    var antsId = requestAnimationFrame(this.antsUpdate);
+    this.setState((ps) => {
+      return {
+        antsOffset: ps.antsOffset - 1,
+        antsId: antsId
+      };
+    });
   }
 }
 
