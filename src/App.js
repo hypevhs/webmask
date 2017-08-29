@@ -52,7 +52,7 @@ class App extends Component {
   }
 
   onSetSelection(xywh) {
-    xywh.setState({ selection: xywh });
+    this.setState({ selection: xywh });
   }
 }
 
