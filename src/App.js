@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Toolbar from "./Toolbar.js";
-import Canvas from "./Canvas.js";
-import RectangleSelector from "./RectangleSelector.js"
 import TestImage from "./TestImage.js";
+import CanvasSet from "./CanvasSet.js";
 
 class App extends Component {
   constructor(props) {
@@ -28,20 +27,11 @@ class App extends Component {
     return (
       <div className="app">
         <Toolbar />
-        <div style={{
-          width: this.state.image.naturalWidth || 640,
-          height: this.state.image.naturalHeight || 480,
-          display: "inline-block",
-          border: "1px solid black"
-        }}>
-          <Canvas
-            image={this.state.image}
-            masks={this.state.operations} />
-          <RectangleSelector
-            width={this.state.image.naturalWidth || 640}
-            height={this.state.image.naturalHeight || 480}
-            onSetSelection={this.onSetSelection} />
-        </div>
+        <CanvasSet
+          image={this.state.image}
+          operations={[]}
+          onSetSelection={this.onSetSelection}
+        />
         <TestImage setImage={this.setImage} />
         <span>{this.state.selection.x},{this.state.selection.y},{this.state.selection.w},{this.state.selection.h}</span>
       </div>
