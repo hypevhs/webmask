@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import InvertMask from './masks/InvertMask.js';
 
 class Canvas extends Component {
   constructor(props) {
@@ -17,12 +18,12 @@ class Canvas extends Component {
   }
 
   componentDidMount() {
-    var ctx = ReactDOM.findDOMNode(this).getContext('2d');
+    var ctx = this.getContext();
     this.repaint(ctx);
   }
 
   componentDidUpdate() {
-    var ctx = ReactDOM.findDOMNode(this).getContext('2d');
+    var ctx = this.getContext();
     ctx.clearRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
     this.repaint(ctx);
   }
@@ -35,11 +36,31 @@ class Canvas extends Component {
   }
 
   applyMasks() {
-    if (this.props.masks && this.props.masks.length) {
-      console.log(`Applying ${this.props.masks.length} masks.`);
-    } else {
+    if (!this.props.masks || !this.props.masks.length) {
       console.log("Applying no masks.");
+      return;
     }
+
+    console.log(`Applying ${this.props.masks.length} masks.`);
+
+    var ctx = this.getContext();
+    for (var i = 0; i < this.props.masks.length; i++) {
+      var here = this.props.masks[i];
+      var selection = { x:here.x, y:here.y, w:here.w, h:here.h };
+      console.log(`Mask #${i}: ${here.type} at ${selection.x},${selection.y},${selection.w},${selection.h}`);
+      switch (here.type) {
+        case "invert":
+          new InvertMask().applyMask(ctx, selection);
+        break;
+        default:
+        console.log("Unknown mask type");
+        break;
+      }
+    }
+  }
+
+  getContext() {
+    return ReactDOM.findDOMNode(this).getContext('2d');
   }
 }
 

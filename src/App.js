@@ -10,7 +10,15 @@ class App extends Component {
 
     this.state = {
       image: null,
-      masks: [],
+      masks: [
+        {
+          x: 24,
+          y: 32,
+          w: 264,
+          h: 168,
+          type: "invert"
+        }
+      ],
       selection: {
         x: 0,
         y: 0,
