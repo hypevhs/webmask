@@ -5,16 +5,16 @@ import testImageFile from './testfl.png';
 class TestImage extends Component {
   constructor(props) {
     super(props);
-    this.clickHandler = this.clickHandler.bind(this);
+    this.onLoad = this.onLoad.bind(this);
   }
 
   render() {
     return (
-      <img onClick={this.clickHandler} src={testImageFile} alt="..."></img>
+      <img style={{ display: "none" }} onLoad={this.onLoad} src={testImageFile} alt="..."></img>
     );
   }
 
-  clickHandler(e) {
+  onLoad(e) {
     var imgEl = ReactDOM.findDOMNode(this);
     this.props.setImage(imgEl);
   }
