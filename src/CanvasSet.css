@@ -1,0 +1,8 @@
+.canvas-set {
+  display: inline-block;
+  border: 1px solid black;
+}
+
+.canvas-rectangle,.canvas-canvas {
+  position: absolute;
+}

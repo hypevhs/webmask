@@ -12,18 +12,16 @@ class Canvas extends Component {
       <canvas
         width={this.props.image.naturalWidth || 640}
         height={this.props.image.naturalHeight || 480}
-        style={{position: "absolute"}}>Canvas not supported.</canvas>
+        className="canvas-canvas">Canvas not supported.</canvas>
     );
   }
 
   componentDidMount() {
-    console.log('mount');
     var ctx = ReactDOM.findDOMNode(this).getContext('2d');
     this.repaint(ctx);
   }
 
   componentDidUpdate() {
-    console.log('update');
     var ctx = ReactDOM.findDOMNode(this).getContext('2d');
     ctx.clearRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
     this.repaint(ctx);

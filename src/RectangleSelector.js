@@ -11,13 +11,13 @@ class RectangleSelector extends Component {
     super(props);
 
     this.state = {
-      x1: 0,
+      x1: 0, // "from" mouse coordinates
       y1: 0,
-      x2: 0,
+      x2: 0, // "to" mouse coordinates
       y2: 0,
       dragging: false,
-      antsId: 0,
-      antsOffset: 0
+      antsId: 0, // return value of requestAnimationFrame
+      antsOffset: 0 // marching ants animation counter
     };
 
     this.onMouseDown = this.onMouseDown.bind(this);
@@ -34,12 +34,11 @@ class RectangleSelector extends Component {
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
         onMouseMove={this.onMouseMove}
-        style={{position: "absolute"}}>Canvas not supported.</canvas>
+        className="canvas-rectangle">Canvas not supported.</canvas>
     );
   }
 
   componentDidMount() {
-    console.log('mount');
     var ctx = ReactDOM.findDOMNode(this).getContext('2d');
     this.repaint(ctx);
     this.antsUpdate();
@@ -74,7 +73,7 @@ class RectangleSelector extends Component {
   }
 
   onMouseDown(e) {
-    var mouse = this.getMouse(e);
+    var mouse = this.getMouseCoords(e);
     this.setState({ x1: mouse.x, y1: mouse.y, x2: mouse.x, y2: mouse.y, dragging: true });
     e.preventDefault();
   }
@@ -109,14 +108,14 @@ class RectangleSelector extends Component {
   }
 
   onMouseMove(e) {
-    var mouse = this.getMouse(e);
+    var mouse = this.getMouseCoords(e);
     if (this.state.dragging) {
       this.setState({ x2: mouse.x, y2: mouse.y });
     }
     e.preventDefault();
   }
 
-  getMouse(e) {
+  getMouseCoords(e) {
     var rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
     var localX = e.clientX - rect.left;
     var localY = e.clientY - rect.top;

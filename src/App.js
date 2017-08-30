@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Toolbar from "./Toolbar.js";
-import TestImage from "./TestImage.js";
-import CanvasSet from "./CanvasSet.js";
+import Toolbar from './Toolbar.js';
+import TestImage from './TestImage.js';
+import CanvasSet from './CanvasSet.js';
 
 class App extends Component {
   constructor(props) {
