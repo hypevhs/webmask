@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      image: new Image(),
+      image: null,
       masks: [],
       selection: {
         x: 0,
@@ -29,7 +29,7 @@ class App extends Component {
         <Toolbar />
         <CanvasSet
           image={this.state.image}
-          masks={this.state.masks}
+          masks={this.state.image ? this.state.masks : []}
           onSetSelection={this.onSetSelection}
         />
         <TestImage setImage={this.setImage} />

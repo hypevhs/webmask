@@ -10,8 +10,8 @@ class Canvas extends Component {
   render() {
     return (
       <canvas
-        width={this.props.image.naturalWidth || 640}
-        height={this.props.image.naturalHeight || 480}
+        width={this.props.width}
+        height={this.props.height}
         className="canvas-canvas">Canvas not supported.</canvas>
     );
   }

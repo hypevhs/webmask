@@ -5,20 +5,41 @@ import './CanvasSet.css';
 
 class CanvasSet extends Component {
   render() {
+    // only render canvases if an image is loaded
+    var set = <div>
+      <Canvas
+        image={this.props.image}
+        width={this.getWidth()}
+        height={this.getHeight()}
+        masks={this.props.masks} />
+      <RectangleSelector
+        width={this.getWidth()}
+        height={this.getHeight()}
+        onSetSelection={this.props.onSetSelection} />
+    </div>;
+
     return (
       <div style={{
-        width: this.props.image.naturalWidth || 640,
-        height: this.props.image.naturalHeight || 480
+        width: this.getWidth(),
+        height: this.getHeight()
       }} className="canvas-set">
-        <Canvas
-          image={this.props.image}
-          masks={this.props.masks} />
-        <RectangleSelector
-          width={this.props.image.naturalWidth || 640}
-          height={this.props.image.naturalHeight || 480}
-          onSetSelection={this.props.onSetSelection} />
+        {!!this.props.image ? set : null}
       </div>
     );
+  }
+
+  getWidth() {
+    if (this.props.image) {
+      return this.props.image.naturalWidth;
+    }
+    return 640;
+  }
+
+  getHeight() {
+    if (this.props.image) {
+      return this.props.image.naturalHeight;
+    }
+    return 480;
   }
 }
 
