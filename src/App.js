@@ -10,15 +10,7 @@ class App extends Component {
 
     this.state = {
       image: null,
-      masks: [
-        {
-          x: 24,
-          y: 32,
-          w: 264,
-          h: 168,
-          type: "invert"
-        }
-      ],
+      masks: [],
       selection: {
         x: 0,
         y: 0,
@@ -29,6 +21,7 @@ class App extends Component {
 
     this.setImage = this.setImage.bind(this);
     this.onSetSelection = this.onSetSelection.bind(this);
+    this.doFl = this.doFl.bind(this);
   }
 
   render() {
@@ -41,6 +34,7 @@ class App extends Component {
           onSetSelection={this.onSetSelection}
         />
         <TestImage setImage={this.setImage} />
+        <button onClick={this.doFl}>AAAAAAAAAAAAAAAAAAAAAAAAA</button>
         <span>{this.state.selection.x},{this.state.selection.y},{this.state.selection.w},{this.state.selection.h}</span>
       </div>
     );
@@ -52,6 +46,22 @@ class App extends Component {
 
   onSetSelection(xywh) {
     this.setState({ selection: xywh });
+  }
+
+  doFl() {
+    this.setState((p) => {
+      var copy = p.masks.slice(0);
+      copy.push({
+        x: 24,
+        y: 32,
+        w: 264,
+        h: 168,
+        type: "fl"
+      });
+      return {
+        masks: copy
+      }
+    });
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import InvertMask from './masks/InvertMask.js';
+import FLMask from './masks/FLMask.js';
 
 class Canvas extends Component {
   constructor(props) {
@@ -52,8 +53,12 @@ class Canvas extends Component {
         case "invert":
           new InvertMask().applyMask(ctx, selection);
         break;
+        case "fl":
+          //new InvertMask().applyMask(ctx, selection);
+          new FLMask().applyMask(ctx, selection);
+          break;
         default:
-        console.log("Unknown mask type");
+          console.log("Unknown mask type");
         break;
       }
     }
