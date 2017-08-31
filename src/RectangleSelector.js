@@ -11,6 +11,8 @@ class RectangleSelector extends Component {
     super(props);
 
     this.state = {
+      mouseOverX: -99,
+      mouseOverY: -99,
       x1: 0, // "from" mouse coordinates
       y1: 0,
       x2: 0, // "to" mouse coordinates
@@ -23,6 +25,7 @@ class RectangleSelector extends Component {
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
     this.antsUpdate = this.antsUpdate.bind(this);
   }
 
@@ -34,6 +37,7 @@ class RectangleSelector extends Component {
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
         onMouseMove={this.onMouseMove}
+        onMouseLeave={this.onMouseLeave}
         className="canvas-rectangle">Canvas not supported.</canvas>
     );
   }
@@ -58,9 +62,16 @@ class RectangleSelector extends Component {
     ctx.save();
     ctx.translate(0.5, 0.5); // fixes line thickness, but breaks line dashes!
     ctx.lineWidth = 1;
-    var xywh = this.getRealSelect();
     ctx.setLineDash([4,6]);
 
+    this.drawSelectionAnts(ctx);
+    this.drawCursor(ctx);
+
+    ctx.restore();
+  }
+
+  drawSelectionAnts(ctx) {
+    var xywh = this.getRealSelect();
     ctx.strokeStyle = "black";
     ctx.lineDashOffset = 0+this.state.antsOffset;
     ctx.strokeRect(xywh.x, xywh.y, xywh.w, xywh.h);
@@ -68,7 +79,16 @@ class RectangleSelector extends Component {
     ctx.strokeStyle = "white";
     ctx.lineDashOffset = 5+this.state.antsOffset;
     ctx.strokeRect(xywh.x, xywh.y, xywh.w, xywh.h);
+  }
 
+  drawCursor(ctx) {
+    var cellX = this.blockFloor(this.state.mouseOverX);
+    var cellY = this.blockFloor(this.state.mouseOverY);
+
+    ctx.save();
+    ctx.setLineDash([]);
+    ctx.strokeStyle = "red";
+    ctx.strokeRect(cellX, cellY, 8, 8);
     ctx.restore();
   }
 
@@ -112,9 +132,15 @@ class RectangleSelector extends Component {
   onMouseMove(e) {
     var mouse = this.getMouseCoords(e);
     if (this.state.dragging) {
-      this.setState({ x2: mouse.x, y2: mouse.y });
+      this.setState({ x2: mouse.x, y2: mouse.y, mouseOverX: mouse.x, mouseOverY: mouse.y });
+    } else {
+      this.setState({ mouseOverX: mouse.x, mouseOverY: mouse.y });
     }
     e.preventDefault();
+  }
+
+  onMouseLeave(e) {
+    this.setState({ mouseOverX: -99, mouseOverY: -99 });
   }
 
   getMouseCoords(e) {
