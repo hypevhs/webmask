@@ -54,7 +54,6 @@ class Canvas extends Component {
           new InvertMask().applyMask(ctx, selection);
         break;
         case "fl":
-          //new InvertMask().applyMask(ctx, selection);
           new FLMask().applyMask(ctx, selection);
           break;
         default:

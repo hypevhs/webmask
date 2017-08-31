@@ -132,17 +132,14 @@ class FLMask {
     console.assert(table[0] instanceof Array);
     console.assert(table[0].length);
     console.assert(table[0][0] instanceof Object); // FLCell
-    console.log(`table: ${table.length},${table[0].length}`);
 
     console.assert(xMap instanceof Array);
     console.assert(xMap.length);
     console.assert(typeof xMap[0] === "number");
-    console.log(`xMap: ${xMap.length}`);
 
     console.assert(yMap instanceof Array);
     console.assert(yMap.length);
     console.assert(typeof yMap[0] === "number");
-    console.log(`yMap: ${yMap.length}`);
 
     return { table:table, xMap:xMap, yMap:yMap };
   }

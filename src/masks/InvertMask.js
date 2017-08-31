@@ -11,7 +11,7 @@ class InvertMask {
         var idxRed   = (y * sel.w + x) * 4;
         var idxGreen = idxRed+1;
         var idxBlue  = idxRed+2;
-        // and idxAlpha is idxRed+3
+        // and we leave alpha data unchanged
         myImageData.data[idxRed] = 255 - myImageData.data[idxRed];
         myImageData.data[idxGreen] = 255 - myImageData.data[idxGreen];
         myImageData.data[idxBlue] = 255 - myImageData.data[idxBlue];
