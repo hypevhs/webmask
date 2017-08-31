@@ -52,13 +52,13 @@ class Canvas extends Component {
       switch (here.type) {
         case "invert":
           new InvertMask().applyMask(ctx, selection);
-        break;
+          break;
         case "fl":
           new FLMask().applyMask(ctx, selection);
           break;
         default:
           console.log("Unknown mask type");
-        break;
+          break;
       }
     }
   }

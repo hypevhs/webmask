@@ -114,8 +114,6 @@ class FLMask {
     var rx = table.xMap[table.table[y][x].pair];
     var ry = table.yMap[table.table[y][x].pair];
     var rinv = table.table[y][x].no !== table.table[y][x].pair;
-    if (!rinv)
-      console.log(`no rinv for ${rx},${ry}: ${rinv}`);
     return this.FLTransformResult(rx, ry, rinv);
   }
 
