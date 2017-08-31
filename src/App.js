@@ -27,14 +27,17 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Toolbar addMask={this.addMask} />
-        <CanvasSet
-          image={this.state.image}
-          masks={this.state.image ? this.state.masks : []}
-          onSetSelection={this.onSetSelection}
-        />
+        <div className="toolbar-container">
+          <Toolbar addMask={this.addMask} />
+        </div>
+        <div className="workspace">
+          <CanvasSet
+            image={this.state.image}
+            masks={this.state.image ? this.state.masks : []}
+            onSetSelection={this.onSetSelection}
+          />
+        </div>
         <TestImage setImage={this.setImage} />
-        <span>{this.state.selection.x},{this.state.selection.y},{this.state.selection.w},{this.state.selection.h}</span>
       </div>
     );
   }

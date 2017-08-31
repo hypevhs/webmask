@@ -1,0 +1,19 @@
+.toolbar-container {
+  display: flex;
+  justify-content: center;
+}
+
+.workspace {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.workspace > *:first-child {
+  margin-right: 20px;
+}
+
+.workspace > *:last-child {
+  width: 200px;
+  border: 1px solid black;
+}
