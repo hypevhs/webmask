@@ -21,20 +21,19 @@ class App extends Component {
 
     this.setImage = this.setImage.bind(this);
     this.onSetSelection = this.onSetSelection.bind(this);
-    this.doFl = this.doFl.bind(this);
+    this.addMask = this.addMask.bind(this);
   }
 
   render() {
     return (
       <div className="app">
-        <Toolbar />
+        <Toolbar addMask={this.addMask} />
         <CanvasSet
           image={this.state.image}
           masks={this.state.image ? this.state.masks : []}
           onSetSelection={this.onSetSelection}
         />
         <TestImage setImage={this.setImage} />
-        <button onClick={this.doFl}>AAAAAAAAAAAAAAAAAAAAAAAAA</button>
         <span>{this.state.selection.x},{this.state.selection.y},{this.state.selection.w},{this.state.selection.h}</span>
       </div>
     );
@@ -48,15 +47,16 @@ class App extends Component {
     this.setState({ selection: xywh });
   }
 
-  doFl() {
+  addMask(type) {
+    // append mask object to this.state.mask (an array)
     this.setState((p) => {
       var copy = p.masks.slice(0);
       copy.push({
-        x: 24,
-        y: 32,
-        w: 264,
-        h: 168,
-        type: "fl"
+        x: p.selection.x,
+        y: p.selection.y,
+        w: p.selection.w,
+        h: p.selection.h,
+        type: type
       });
       return {
         masks: copy
