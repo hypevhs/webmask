@@ -73,12 +73,14 @@ class RectangleSelector extends Component {
   }
 
   onMouseDown(e) {
+    if (e.button !== 0) { return; }
     var mouse = this.getMouseCoords(e);
     this.setState({ x1: mouse.x, y1: mouse.y, x2: mouse.x, y2: mouse.y, dragging: true });
     e.preventDefault();
   }
 
   onMouseUp(e) {
+    if (e.button !== 0) { return; }
     this.setState({ dragging: false });
     var xywh = this.getRealSelect();
     // pass active selection range to parent
