@@ -5,8 +5,6 @@ class Toolbar extends Component {
   render() {
     return (
       <div className="toolbar">
-        <MaskButton text="Rotate CCW" />
-        <MaskButton text="Rotate CW" />
         <MaskButton text="Shift RGB" />
         <MaskButton text="XOR 0x80" />
         <MaskButton text="Invert" onClick={() => this.props.addMask("invert")} />
