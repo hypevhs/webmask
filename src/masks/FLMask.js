@@ -9,37 +9,70 @@ class FLMask {
     // get parameters
     var width = sel.w;
     var height = sel.h;
-    var bsWidth = 8;
-    var bsHeight = 8;
-    var cellWidth = width / bsWidth;
-    var cellHeight = height / bsHeight;
+    var cellWidth = width / 8;
+    var cellHeight = height / 8;
 
     // no bullshit selection sizes
-    console.assert(height % bsHeight === 0);
-    console.assert(width % bsWidth === 0);
+    console.assert(height % 8 === 0);
+    console.assert(width % 8 === 0);
 
     // get FLTable
     var table = this.buildTable(cellWidth, cellHeight);
 
-    // copy out our selection in 8x8 blocks
-    var imageDatas = Array(cellHeight).fill().map(y => Array(cellWidth).fill(null));
-    var x,y;
-    for (y = 0; y < cellHeight; y++) {
-      for (x = 0; x < cellWidth; x++) {
-        imageDatas[y][x] = ctx.getImageData(sel.x + x * bsWidth, sel.y + y * bsHeight, bsWidth, bsHeight);
+    // extract into source buffer
+    var srcData = ctx.getImageData(sel.x, sel.y, sel.w, sel.h);
+
+    // create empty destination buffer
+    var destData = ctx.createImageData(srcData);
+
+    // srcData buffer -> magical rearrangement dictionary -> destData buffer
+    for (var y = 0; y < cellHeight; y++) {
+      for (var x = 0; x < cellWidth; x++) {
+        var tr = this.tableTransform(table, x, y);
+        this.transferCell(srcData, destData, x*8, y*8, tr.x*8, tr.y*8, tr.inv);
       }
     }
 
-    // then using the magical rearrangement dictionary, draw them back to the canvas in strange orders
-    for (y = 0; y < cellHeight; y++) {
-      for (x = 0; x < cellWidth; x++) {
-        // FLTransformResult
-        var tr = this.tableTransform(table, x, y);
-        ctx.putImageData(imageDatas[y][x], sel.x + tr.x * bsWidth, sel.y + tr.y * bsHeight);
-      }
-    }
+    // draw destination buffer back to the canvas
+    ctx.putImageData(destData, sel.x, sel.y);
 
     ctx.restore();
+  }
+
+  /**
+   * transfer an 8x8 cell starting from x,y from one buffer to another
+   * @param {ImageData} src image buffer we copy from
+   * @param {ImageData} dest image buffer we copy to
+   * @param {number} srcX pixel coordinate X of source cell's topleftmost pixel
+   * @param {number} srcY pixel coordinate Y of destination cell's topleftmost pixel
+   * @param {number} destX pixel coordinate X of source cell's topleftmost pixel
+   * @param {number} destY pixel coordinate Y of destination cell's topleftmost pixel
+   * @param {boolean} invert whether to invert the RGB of this cell
+   */
+  transferCell(src, dest, srcX, srcY, destX, destY, invert) {
+    for (var y = 0; y < 8; y++) {
+      for (var x = 0; x < 8; x++) {
+        var srcRealX  = srcX  + x;
+        var srcRealY  = srcY  + y;
+        var destRealX = destX + x;
+        var destRealY = destY + y;
+
+        var srcIdx  = (srcRealY  * src.width  + srcRealX ) * 4;
+        var destIdx = (destRealY * dest.width + destRealX) * 4;
+
+        if (!invert) {
+          dest.data[destIdx+0] = src.data[srcIdx+0];
+          dest.data[destIdx+1] = src.data[srcIdx+1];
+          dest.data[destIdx+2] = src.data[srcIdx+2];
+        } else {
+          dest.data[destIdx+0] = 255 - src.data[srcIdx+0];
+          dest.data[destIdx+1] = 255 - src.data[srcIdx+1];
+          dest.data[destIdx+2] = 255 - src.data[srcIdx+2];
+        }
+        // copy alpha unaffected by inversion rules
+        dest.data[destIdx+3] = src.data[srcIdx+3];
+      }
+    }
   }
 
   buildTable(width, height) {
