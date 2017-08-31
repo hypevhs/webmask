@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MaskButton from './MaskButton.js';
+import ImageInvert from './buttons/invert.svg';
 
 class Toolbar extends Component {
   render() {
@@ -7,7 +8,7 @@ class Toolbar extends Component {
       <div className="toolbar">
         <MaskButton text="Shift RGB" />
         <MaskButton text="XOR 0x80" />
-        <MaskButton text="Invert" onClick={() => this.props.addMask("invert")} />
+        <MaskButton text="Invert" img={ImageInvert} onClick={() => this.props.addMask("invert")} />
         <MaskButton text="Flip Vertically" />
         <MaskButton text="Flip Horizontally" />
         <MaskButton text="Vertical Glass" />
