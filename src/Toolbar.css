@@ -1,0 +1,18 @@
+.toolbar {
+  margin-top: 4px;
+}
+
+.toolbar-button {
+  width: 64px;
+  height: 64px;
+  background-size: cover;
+  border: 3px groove #bbb;
+  background-color: #999;
+  margin: 0 1px;
+}
+
+.toolbar-button:active {
+  /* border: 3px inset #bbb; */
+  background-position: 2px 2px;
+  background-repeat: no-repeat;
+}

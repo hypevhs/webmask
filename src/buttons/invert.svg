@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.1 r15371"
-   sodipodi:docname="invert128x128.svg">
+   sodipodi:docname="invert.svg">
   <defs
      id="defs2">
     <linearGradient
@@ -33,11 +33,11 @@
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="1"
+     inkscape:pageopacity="0.30588235"
      inkscape:pageshadow="2"
-     inkscape:zoom="4"
-     inkscape:cx="67.274717"
-     inkscape:cy="30.703111"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="-676.8653"
+     inkscape:cy="517.6646"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -65,6 +65,13 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-263.13332)">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3.9690001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect5079"
+       width="33.866669"
+       height="33.866669"
+       x="-1.0172527e-006"
+       y="263.13333" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:33.09547424px;line-height:1.25;font-family:Verdana;-inkscape-font-specification:Verdana;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
