@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import ShiftRgbMask from './masks/ShiftRgbMask.js';
 import InvertMask from './masks/InvertMask.js';
 import FLMask from './masks/FLMask.js';
 
@@ -50,6 +51,9 @@ class Canvas extends Component {
       var selection = { x:here.x, y:here.y, w:here.w, h:here.h };
       console.log(`Mask #${i}: ${here.type} at ${selection.x},${selection.y},${selection.w},${selection.h}`);
       switch (here.type) {
+        case "shiftrgb":
+          new ShiftRgbMask().applyMask(ctx, selection);
+          break;
         case "invert":
           new InvertMask().applyMask(ctx, selection);
           break;
