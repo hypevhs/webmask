@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Toolbar from './Toolbar.js';
-import TestImage from './TestImage.js';
 import CanvasSet from './CanvasSet.js';
 import UndoList from './UndoList.js';
+import FullScreenDropZone from './FullScreenDropZone.js';
 
 class App extends Component {
   constructor(props) {
@@ -12,13 +12,6 @@ class App extends Component {
     this.state = {
       image: null,
       masks: [
-        {
-          type: "mekoplus",
-          x: 48,
-          y: 32,
-          w: 240,
-          h: 192
-        }
       ],
       selection: {
         x: 0,
@@ -36,18 +29,19 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <div className="toolbar-container">
-          <Toolbar addMask={this.addMask} />
-        </div>
-        <div className="workspace">
-          <CanvasSet
-            image={this.state.image}
-            masks={this.state.image ? this.state.masks : []}
-            onSetSelection={this.onSetSelection}
-          />
-          <UndoList masks={this.state.masks} />
-        </div>
-        <TestImage setImage={this.setImage} />
+        <FullScreenDropZone onNewImage={this.setImage}>
+          <div className="toolbar-container">
+            <Toolbar addMask={this.addMask} />
+          </div>
+          <div className="workspace">
+            <CanvasSet
+              image={this.state.image}
+              masks={this.state.image ? this.state.masks : []}
+              onSetSelection={this.onSetSelection}
+            />
+            <UndoList masks={this.state.masks} />
+          </div>
+        </FullScreenDropZone>
       </div>
     );
   }
