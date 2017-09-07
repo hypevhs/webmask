@@ -7,6 +7,7 @@ import { FlipVertMask, FlipHorizMask } from './masks/FlipMask.js';
 import { VertGlassMask, HorizGlassMask } from './masks/GlassMask.js';
 import { MekoPlusMask, MekoMinusMask } from './masks/MekoMask.js';
 import FLMask from './masks/FLMask.js';
+import Q0Mask from './masks/Q0Mask.js';
 
 class Canvas extends Component {
   constructor(props) {
@@ -84,6 +85,9 @@ class Canvas extends Component {
           break;
         case "fl":
           new FLMask().applyMask(ctx, selection);
+          break;
+        case "q0":
+          new Q0Mask().applyMask(ctx, selection);
           break;
         default:
           console.log("Unknown mask type");
