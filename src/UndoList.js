@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class UndoList extends Component {
   render() {
     return (
-      <table>
+      <table className="undo-list">
         <thead>
           <tr>
             <td>{this.props.masks.length} masks</td>

@@ -9,12 +9,12 @@
   padding: 20px;
 }
 
-.workspace > *:first-child {
+.workspace .canvas-set {
   margin-right: 20px;
 }
 
-.workspace > *:last-child {
-  width: 200px;
+.workspace .undo-list {
+  min-width: 300px;
   border: 1px solid black;
 }
 
