@@ -1,0 +1,25 @@
+.undo-list-table,.undo-list-table-header {
+  width: 100%;
+}
+
+.undo-list-table-header th,.undo-list-table tr {
+  text-align: left;
+}
+
+.undo-list-table {
+  display: block;
+  overflow-y: overlay;
+  height: 400px;
+}
+
+.undo-list-table tr {
+  text-align: left;
+}
+.undo-list-table-header th:nth-child(1),.undo-list-table td:nth-child(1) {
+  width: 100px;
+  padding: 0px;
+}
+.undo-list-table-header th:nth-child(2),.undo-list-table td:nth-child(2) {
+  /* width: 200px; */
+  padding: 0px;
+}

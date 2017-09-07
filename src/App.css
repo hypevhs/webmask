@@ -14,8 +14,8 @@
 }
 
 .workspace .undo-list {
-  min-width: 300px;
   border: 1px solid black;
+  width: 300px;
 }
 
 .dropzone-overlay {
