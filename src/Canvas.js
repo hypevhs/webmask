@@ -5,6 +5,7 @@ import XorMask from './masks/XorMask.js';
 import InvertMask from './masks/InvertMask.js';
 import { FlipVertMask, FlipHorizMask } from './masks/FlipMask.js';
 import { VertGlassMask, HorizGlassMask } from './masks/GlassMask.js';
+import { MekoPlusMask, MekoMinusMask } from './masks/MekoMask.js';
 import FLMask from './masks/FLMask.js';
 
 class Canvas extends Component {
@@ -74,6 +75,12 @@ class Canvas extends Component {
           break;
         case "horizglass":
           new HorizGlassMask().applyMask(ctx, selection);
+          break;
+        case "mekoplus":
+          new MekoPlusMask().applyMask(ctx, selection);
+          break;
+        case "mekominus":
+          new MekoMinusMask().applyMask(ctx, selection);
           break;
         case "fl":
           new FLMask().applyMask(ctx, selection);
