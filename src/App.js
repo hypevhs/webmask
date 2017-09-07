@@ -55,6 +55,9 @@ class App extends Component {
   }
 
   addMask(type) {
+    if (this.state.selection.w === 0 || this.state.selection.h === 0) {
+      return; // todo: toast(please select something first)
+    }
     // append mask object to this.state.mask (an array)
     this.setState((p) => {
       var copy = p.masks.slice(0);
