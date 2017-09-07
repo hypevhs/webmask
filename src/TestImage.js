@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import testImageFile from './testfl.png';
+import testImageFile from './testmekominus.jpg';
 
 class TestImage extends Component {
   constructor(props) {

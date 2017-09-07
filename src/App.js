@@ -11,7 +11,15 @@ class App extends Component {
 
     this.state = {
       image: null,
-      masks: [],
+      masks: [
+        {
+          type: "mekoplus",
+          x: 48,
+          y: 32,
+          w: 240,
+          h: 192
+        }
+      ],
       selection: {
         x: 0,
         y: 0,
