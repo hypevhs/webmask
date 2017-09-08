@@ -24,6 +24,7 @@ class App extends Component {
     this.setImage = this.setImage.bind(this);
     this.onSetSelection = this.onSetSelection.bind(this);
     this.addMask = this.addMask.bind(this);
+    this.resetMasksToIdx = this.resetMasksToIdx.bind(this);
   }
 
   render() {
@@ -39,7 +40,7 @@ class App extends Component {
               masks={this.state.image ? this.state.masks : []}
               onSetSelection={this.onSetSelection}
             />
-            <UndoList masks={this.state.masks} />
+            <UndoList masks={this.state.masks} resetMasksToIdx={this.resetMasksToIdx} />
           </div>
         </FullScreenDropZone>
       </div>
@@ -71,6 +72,14 @@ class App extends Component {
       return {
         masks: copy
       }
+    });
+  }
+
+  resetMasksToIdx(idx) {
+    // todo: sanitize
+    this.setState((p) => {
+      var masks = p.masks.slice(0, idx);
+      return { masks };
     });
   }
 }

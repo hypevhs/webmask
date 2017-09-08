@@ -4,7 +4,13 @@ import './UndoList.css';
 class UndoList extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      mouseIdx: undefined
+    };
+
     this.undoToHere = this.undoToHere.bind(this);
+    this.setMouseIdx = this.setMouseIdx.bind(this);
   }
 
   render() {
@@ -12,16 +18,16 @@ class UndoList extends Component {
       <div className="undo-list">
         <table className="undo-list-table-header">
           <thead>
-            {/* <tr>
+            <tr>
               <th>{this.props.masks.length} masks</th>
-            </tr> */}
+            </tr>
             <tr>
               <th>Type</th>
               <th>Area</th>
             </tr>
           </thead>
         </table>
-        <table className="undo-list-table">
+        <table className="undo-list-table" onMouseLeave={this.setMouseIdx(undefined)} >
           <tbody>
             {this.getRows()}
           </tbody>
@@ -32,7 +38,8 @@ class UndoList extends Component {
 
   getRows() {
     var rows = this.props.masks.map((here, idx) => {
-      return <tr key={idx} onClick={this.undoToHere}>
+      const rowClass = (idx >= this.state.mouseIdx) ? "highlight-deleting" : null;
+      return <tr key={idx} onClick={this.undoToHere(idx)} onMouseOver={this.setMouseIdx(idx)} className={rowClass}>
         <td>{here.type}</td>
         <td>{`{${here.x}, ${here.y}, ${here.w}, ${here.h}}`}</td>
       </tr>;
@@ -40,8 +47,17 @@ class UndoList extends Component {
     return rows;
   }
 
-  undoToHere(e) {
-    console.log(e, e.relatedTarget);
+  undoToHere(idx) {
+    return () => {
+      this.props.resetMasksToIdx(idx);
+    };
+  }
+
+  setMouseIdx(idx) {
+    return () => {
+      console.log(`mouseidx is now ${idx}`);
+      this.setState({ mouseIdx: idx });
+    };
   }
 }
 

@@ -10,11 +10,18 @@
   display: block;
   overflow-y: overlay;
   height: 400px;
+  border-spacing: 0;
 }
 
 .undo-list-table tr {
   text-align: left;
+  cursor: pointer;
 }
+
+.undo-list-table tr.highlight-deleting {
+  color: grey;
+}
+
 .undo-list-table-header th:nth-child(1),.undo-list-table td:nth-child(1) {
   width: 100px;
   padding: 0px;
