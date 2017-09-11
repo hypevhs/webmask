@@ -27,8 +27,8 @@ class UndoList extends Component {
             </tr>
           </thead>
         </table>
-        <table className="undo-list-table" onMouseLeave={this.setMouseIdx(undefined)} >
-          <tbody>
+        <table className="undo-list-table">
+          <tbody onMouseLeave={this.setMouseIdx(undefined)} >
             {this.getRows()}
           </tbody>
         </table>
