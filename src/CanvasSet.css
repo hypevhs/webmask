@@ -1,6 +1,7 @@
 .canvas-set {
   display: inline-block;
-  border: 1px solid black;
+  margin: 10px;
+  margin-top: 0;
 }
 
 .canvas-rectangle,.canvas-canvas {

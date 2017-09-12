@@ -1,5 +1,7 @@
 .toolbar {
-  margin-top: 4px;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
 }
 
 .toolbar-button {

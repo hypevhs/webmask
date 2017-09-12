@@ -28,20 +28,31 @@ class App extends Component {
   }
 
   render() {
+    let workspace = [];
+    if (!!this.state.image) {
+      workspace = (
+        <div className="workspace">
+          <div className="undo-list-fake" />
+          <CanvasSet
+            image={this.state.image}
+            masks={this.state.image ? this.state.masks : []}
+            onSetSelection={this.onSetSelection} />
+          <UndoList masks={this.state.masks} resetMasksToIdx={this.resetMasksToIdx} />
+        </div>
+      );
+    } else {
+      workspace = (
+        <div className="workspace">
+          <div className="no-file-loaded">No file loaded.<br /><br />Drag an image here or click the Open button.</div>
+        </div>
+      );
+    }
+
     return (
       <div className="app">
         <FullScreenDropZone onNewImage={this.setImage}>
-          <div className="toolbar-container">
-            <Toolbar addMask={this.addMask} />
-          </div>
-          <div className="workspace">
-            <CanvasSet
-              image={this.state.image}
-              masks={this.state.image ? this.state.masks : []}
-              onSetSelection={this.onSetSelection}
-            />
-            <UndoList masks={this.state.masks} resetMasksToIdx={this.resetMasksToIdx} />
-          </div>
+          <Toolbar addMask={this.addMask} />
+          {workspace}
         </FullScreenDropZone>
       </div>
     );

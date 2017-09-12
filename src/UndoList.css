@@ -1,3 +1,16 @@
+.undo-list-fake {
+  width: 300px;
+  /* I want the canvases to be at the center of the flexbox (and therefore the viewport), and make the undo list stick
+   * to its right side. The easiest way is to make a dummy invisible element (with the same width as the undo list) on
+   * the other side of the canvases to balance it out.
+   */
+}
+
+.undo-list {
+  color: rgb(200,200,200);
+  width: 300px;
+}
+
 .undo-list-table,.undo-list-table-header {
   width: 100%;
 }

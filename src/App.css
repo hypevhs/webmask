@@ -1,21 +1,22 @@
-.toolbar-container {
-  display: flex;
-  justify-content: center;
+.app {
+  min-height: 100%;
+  background: url('./static/stressed_linen_texture.png') repeat 0 0;
 }
 
 .workspace {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  padding: 20px;
+  margin: 20px auto;
+  max-width: 960px;
 }
 
-.workspace .canvas-set {
-  margin-right: 20px;
-}
-
-.workspace .undo-list {
-  border: 1px solid black;
-  width: 300px;
+.no-file-loaded {
+  margin: auto;
+  color: rgb(200,200,200);
+  padding: 2.5em 0;
+  text-align: center;
+  font-size: 1.5em;
 }
 
 .dropzone-overlay {
@@ -27,7 +28,7 @@
   padding: 2.5em 0;
   background: rgba(0, 0, 0, 0.5);
   text-align: center;
-  color: #fff;
+  color: white;
   text-shadow: 0px 0px 20px black;
   font-size: 3em;
   z-index: 9999;

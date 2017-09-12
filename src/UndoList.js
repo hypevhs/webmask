@@ -16,11 +16,9 @@ class UndoList extends Component {
   render() {
     return (
       <div className="undo-list">
+        <header>History</header>
         <table className="undo-list-table-header">
           <thead>
-            <tr>
-              <th>{this.props.masks.length} masks</th>
-            </tr>
             <tr>
               <th>Type</th>
               <th>Area</th>
