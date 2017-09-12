@@ -47,13 +47,13 @@ class UndoList extends Component {
 
   undoToHere(idx) {
     return () => {
+      this.setMouseIdx(undefined)();
       this.props.resetMasksToIdx(idx);
     };
   }
 
   setMouseIdx(idx) {
     return () => {
-      console.log(`mouseidx is now ${idx}`);
       this.setState({ mouseIdx: idx });
     };
   }
