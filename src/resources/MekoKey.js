@@ -7,6 +7,7 @@ import * as Base64ArrayBuffer from 'base64-arraybuffer';
  * [...]
  */
 
+// eslint-disable-next-line
 const base64Str = "\
 IGQW8grSDh8KMRfODegcQQh4E0kYSxtRCEEZowggDBIRFyEXG8EfExntAjAEDRlXEW0P1h5PDCgd\
 KAd6IF4FPQaGE6waDhbeFgcVBAztCI8VnQ70DD8RICJdC0MbLRhMBD0SIQoSIlwE8BOZEokYmRsL\
