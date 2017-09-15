@@ -72,13 +72,15 @@ class RectangleSelector extends Component {
 
   drawSelectionAnts(ctx) {
     var xywh = this.getRealSelect();
+    if (xywh.w === 0 || xywh.h === 0)
+      return;
     ctx.strokeStyle = "black";
     ctx.lineDashOffset = 0+this.state.antsOffset;
-    ctx.strokeRect(xywh.x, xywh.y, xywh.w, xywh.h);
+    ctx.strokeRect(xywh.x, xywh.y, xywh.w-1, xywh.h-1);
 
     ctx.strokeStyle = "white";
     ctx.lineDashOffset = 5+this.state.antsOffset;
-    ctx.strokeRect(xywh.x, xywh.y, xywh.w, xywh.h);
+    ctx.strokeRect(xywh.x, xywh.y, xywh.w-1, xywh.h-1);
   }
 
   drawCursor(ctx) {
@@ -88,7 +90,7 @@ class RectangleSelector extends Component {
     ctx.save();
     ctx.setLineDash([]);
     ctx.strokeStyle = "red";
-    ctx.strokeRect(cellX, cellY, 8, 8);
+    ctx.strokeRect(cellX, cellY, 8-1, 8-1);
     ctx.restore();
   }
 
