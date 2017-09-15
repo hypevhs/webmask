@@ -22,7 +22,7 @@ class App extends Component {
     };
 
     this.setImage = this.setImage.bind(this);
-    this.onSetSelection = this.onSetSelection.bind(this);
+    this.setSelection = this.setSelection.bind(this);
     this.addMask = this.addMask.bind(this);
     this.resetMasksToIdx = this.resetMasksToIdx.bind(this);
   }
@@ -36,8 +36,10 @@ class App extends Component {
           <CanvasSet
             image={this.state.image}
             masks={this.state.image ? this.state.masks : []}
-            onSetSelection={this.onSetSelection} />
-          <UndoList masks={this.state.masks} resetMasksToIdx={this.resetMasksToIdx} />
+            onSelection={this.setSelection} />
+          <UndoList
+            masks={this.state.masks}
+            resetMasksToIdx={this.resetMasksToIdx} />
         </div>
       );
     } else {
@@ -62,7 +64,7 @@ class App extends Component {
     this.setState({ image: img });
   }
 
-  onSetSelection(xywh) {
+  setSelection(xywh) {
     this.setState({ selection: xywh });
   }
 

@@ -20,7 +20,7 @@ class CanvasSet extends Component {
           <RectangleSelector
             width={this.getWidth()}
             height={this.getHeight()}
-            onSetSelection={this.props.onSetSelection} />
+            onSelection={this.props.onSelection} />
       </div>
     );
   }

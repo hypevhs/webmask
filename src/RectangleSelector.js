@@ -104,7 +104,7 @@ class RectangleSelector extends Component {
     this.setState({ dragging: false });
     var xywh = this.getRealSelect();
     // pass active selection range to parent
-    this.props.onSetSelection(xywh);
+    this.props.onSelection(xywh);
     e.preventDefault();
   }
 
