@@ -1,11 +1,4 @@
-function movePixel(src, dest, srcX, srcY, dstX, dstY) {
-  const idxRedSrc = (srcY * src.width + srcX) * 4;
-  const idxRedDst = (dstY * src.width + dstX) * 4;
-  dest.data[idxRedSrc + 0] = src.data[idxRedDst + 0];
-  dest.data[idxRedSrc + 1] = src.data[idxRedDst + 1];
-  dest.data[idxRedSrc + 2] = src.data[idxRedDst + 2];
-  dest.data[idxRedSrc + 3] = src.data[idxRedDst + 3];
-}
+import { CopyPixel } from './Common.js';
 
 const TRANS = [12, 8, 6, 15, 9, 13, 2, 11, 1, 4, 14, 7, 0, 5, 10, 3];
 
@@ -32,7 +25,7 @@ class WinMask {
         const x = i + j;
         const newX = i + TRANS[j];
         for (var y = 0; y < sel.h; y++) {
-          movePixel(srcData, destData, x, y, newX, y);
+          CopyPixel(srcData, destData, x, y, newX, y);
         }
       }
     }
