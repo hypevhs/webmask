@@ -68,7 +68,14 @@ class App extends Component {
     this.setState({
       image: img,
       canvasW: w,
-      canvasH: h
+      canvasH: h,
+      masks: [], // should reset masks and selection when loading a new file
+      selection: {
+        x: 0,
+        y: 0,
+        w: 0,
+        h: 0
+      }
     });
   }
 
