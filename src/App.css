@@ -1,9 +1,8 @@
-.app {
-  height: 100%;
+body {
   background: url('./static/stressed_linen_texture.png') repeat 0 0;
 }
 
-.app > div {
+.app, .app > div {
   /* fix dumb dropzone */
   height: 100%;
 }
@@ -13,7 +12,7 @@
   flex-wrap: wrap;
   justify-content: center;
   margin: 20px auto;
-  max-width: 960px;
+  /* max-width: 960px; */
 }
 
 .no-file-loaded {

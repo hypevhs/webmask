@@ -1,36 +1,56 @@
 import React, { Component } from 'react';
 import Canvas from './Canvas.js';
+import CanvasWithVideo from './CanvasWithVideo.js';
 import RectangleSelector from './RectangleSelector.js';
 import './CanvasSet.css';
 
 class CanvasSet extends Component {
+  // this.props.image can be a HTMLImageElement (aka Image()), or a URL to a video.
+
   render() {
     const style = {
-      width: this.getWidth(),
-      height: this.getHeight()
+      width: this.props.width,
+      height: this.props.height
     };
 
     return (
       <div style={style} className="canvas-set">
-        <Canvas
-            image={this.props.image}
-            width={this.getWidth()}
-            height={this.getHeight()}
-            masks={this.props.masks} />
-          <RectangleSelector
-            width={this.getWidth()}
-            height={this.getHeight()}
-            onSelection={this.props.onSelection} />
+        {this.getActualCanvas()}
+        <RectangleSelector
+          width={this.props.width}
+          height={this.props.height}
+          onSelection={this.props.onSelection}
+        />
       </div>
     );
   }
 
-  getWidth() {
-    return this.props.image.naturalWidth;
+  getActualCanvas() {
+    switch (this.getInputType()) {
+      case 'image':
+      return <Canvas
+        getImage={() => { return this.props.image; }}
+        width={this.props.width}
+        height={this.props.height}
+        masks={this.props.masks}
+      />;
+      case 'video':
+      return <CanvasWithVideo
+        videoSrc={this.props.image}
+        width={this.props.width}
+        height={this.props.height}
+        masks={this.props.masks}
+      />;
+      default: return null;
+    }
   }
 
-  getHeight() {
-    return this.props.image.naturalHeight;
+  getInputType() {
+    if (this.props.image instanceof HTMLImageElement) {
+      return "image";
+    } else if (typeof this.props.image === "string") {
+      return "video";
+    }
   }
 }
 
