@@ -7,10 +7,9 @@ class CanvasWithVideo extends Canvas {
   constructor(props) {
     super(props);
 
-    this.state = {
-      rafId: 0, // return value of requestAnimationFrame
-      timer: 0
-    };
+    // return value of requestAnimationFrame
+    // let's not worry about React state.
+    this.rafId = 0;
 
     this.frameUpdate = this.frameUpdate.bind(this);
   }
@@ -21,7 +20,8 @@ class CanvasWithVideo extends Canvas {
   }
 
   componentWillUnmount() {
-    cancelAnimationFrame(this.state.rafId);
+    super.componentWillUnmount();
+    cancelAnimationFrame(this.rafId);
   }
 
   render() {
@@ -44,10 +44,8 @@ class CanvasWithVideo extends Canvas {
   }
 
   frameUpdate() {
-    var rafId = requestAnimationFrame(this.frameUpdate);
-    this.setState((ps) => {
-      return { rafId, timer: ps.timer + 1 };
-    });
+    this.rafId = requestAnimationFrame(this.frameUpdate);
+    this.repaint(this.getContext());
   }
 
   getImage() {
