@@ -29,14 +29,14 @@ class CanvasSet extends Component {
     switch (this.getInputType()) {
       case 'image':
       return <Canvas
-        image={this.props.image}
+        getImage={() => { return this.props.image; }}
         width={this.props.width}
         height={this.props.height}
         masks={this.props.masks}
       />;
       case 'video':
       return <CanvasWithVideo
-        image={this.props.image}
+        videoSrc={this.props.image}
         width={this.props.width}
         height={this.props.height}
         masks={this.props.masks}

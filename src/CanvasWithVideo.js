@@ -1,9 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
 import Canvas from './Canvas.js';
 
-// todo: use composition, not inheritance
-class CanvasWithVideo extends Canvas {
+class CanvasWithVideo extends Component {
   constructor(props) {
     super(props);
 
@@ -12,22 +10,27 @@ class CanvasWithVideo extends Canvas {
     this.rafId = 0;
 
     this.frameUpdate = this.frameUpdate.bind(this);
+    this.getImage = this.getImage.bind(this);
   }
 
   componentDidMount() {
-    super.componentDidMount();
     this.frameUpdate();
   }
 
   componentWillUnmount() {
-    super.componentWillUnmount();
     cancelAnimationFrame(this.rafId);
   }
 
   render() {
     return (
       <div>
-        {super.render()}
+        <Canvas
+          getImage={this.getImage}
+          width={this.props.width}
+          height={this.props.height}
+          masks={this.props.masks}
+          ref={(me) => { this.canvas = me; }}
+        />;
         {this.renderVideo()}
       </div>
     );
@@ -36,7 +39,7 @@ class CanvasWithVideo extends Canvas {
   renderVideo() {
     return <video
       style={{ display: 'none' }}
-      src={this.props.image}
+      src={this.props.videoSrc}
       autoPlay
       loop
       ref={(me) => { this.videoDom = me; }}
@@ -45,19 +48,14 @@ class CanvasWithVideo extends Canvas {
 
   frameUpdate() {
     this.rafId = requestAnimationFrame(this.frameUpdate);
-    this.repaint(this.getContext());
+    this.canvas.repaint(this.canvas.getContext());
   }
 
   getImage() {
     // use a <video> element for canvas drawImage
     // it's kind of crazy that this is supported
-    return this.videoDom;
-  }
-
-  getContext() {
-    // sometimes you just gotta use DOM, and refs don't cut it.
-    // React purists never made any real apps anyway, so don't listen to their NEVER this or ALWAYS that.
-    return ReactDOM.findDOMNode(this).childNodes[0].getContext('2d');
+    // if it's not mounted yet, use a placeholder
+    return this.videoDom || new Image(this.props.width, this.props.height);
   }
 }
 

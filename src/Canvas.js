@@ -38,13 +38,9 @@ class Canvas extends Component {
 
   repaint(ctx) {
     ctx.save();
-    ctx.drawImage(this.getImage(), 0, 0);
+    ctx.drawImage(this.props.getImage(), 0, 0);
     this.applyMasks();
     ctx.restore();
-  }
-
-  getImage() {
-    return this.props.image;
   }
 
   applyMasks() {
