@@ -11,6 +11,8 @@ class App extends Component {
 
     this.state = {
       image: null,
+      canvasW: 100,
+      canvasH: 100,
       masks: [
       ],
       selection: {
@@ -28,13 +30,15 @@ class App extends Component {
   }
 
   render() {
-    let workspace = [];
+    let workspace = null;
     if (!!this.state.image) {
       workspace = (
         <div className="workspace">
           <div className="undo-list-fake" />
           <CanvasSet
             image={this.state.image}
+            width={this.state.canvasW}
+            height={this.state.canvasH}
             masks={this.state.image ? this.state.masks : []}
             onSelection={this.setSelection} />
           <UndoList
@@ -60,8 +64,12 @@ class App extends Component {
     );
   }
 
-  setImage(img) {
-    this.setState({ image: img });
+  setImage(img, w, h) {
+    this.setState({
+      image: img,
+      canvasW: w,
+      canvasH: h
+    });
   }
 
   setSelection(xywh) {

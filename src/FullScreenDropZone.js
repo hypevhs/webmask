@@ -35,7 +35,8 @@ class FullScreenDropZone extends Component {
 
   onDropAccepted(files) {
     console.log(files);
-    this.setState({ tempVideoTag: null });
+    // clear out the old src blob url, in case we switch from video to something else
+    this.setState({ tempVideoSrc: null });
     if (files[0].type === "video/mp4") {
       this.tryLoadVideo(files[0]);
     } else {
@@ -46,8 +47,8 @@ class FullScreenDropZone extends Component {
   tryLoadImage(file) {
     const img = new Image();
     img.onload = () => {
-      console.log("image loaded...");
-      this.props.onNewImage(img);
+      console.log("new image loaded");
+      this.props.onNewImage(img, img.naturalWidth, img.naturalHeight);
     }
     img.src = URL.createObjectURL(file);
   }
@@ -55,19 +56,21 @@ class FullScreenDropZone extends Component {
   tryLoadVideo(file) {
     const tempVideoSrc = URL.createObjectURL(file);
     this.setState({ tempVideoSrc });
+    // once the state is set here, a <video> tag will render the blob URL invisibly.
+    // then, we'll just wait for <video> to finish loading before callback-ing.
   }
 
   getTempVideo() {
-    // if we have a video file to load, let's use a temporary video tag with its events.
+    // if we have a video file to load, let's make a temporary <video> tag and listen for its loading events.
     return <video
       style={{ display: 'none' }}
       src={this.state.tempVideoSrc}
-      onLoadedData={() => {
-        // or you could try onLoadedMetadata
-        console.log('onLoadedData');
-        this.props.onNewImage(this.state.tempVideoSrc);
+      ref={(me) => { this.videoTag = me; }}
+      onLoadedMetadata={() => {
+        // why onLoadedMetadata? https://stackoverflow.com/a/9333276/1364757
+        console.log(`new video loaded with ${this.videoTag.videoWidth},${this.videoTag.videoHeight}`);
+        this.props.onNewImage(this.state.tempVideoSrc, this.videoTag.videoWidth, this.videoTag.videoHeight);
       }}
-      onPlay={() => { console.log('onPlay'); }}
     />;
   }
 

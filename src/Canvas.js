@@ -38,24 +38,24 @@ class Canvas extends Component {
 
   repaint(ctx) {
     ctx.save();
-    ctx.drawImage(this.props.image, 0, 0);
+    ctx.drawImage(this.getImage(), 0, 0);
     this.applyMasks();
     ctx.restore();
   }
 
+  getImage() {
+    return this.props.image;
+  }
+
   applyMasks() {
     if (!this.props.masks || !this.props.masks.length) {
-      console.log("Applying no masks.");
       return;
     }
-
-    console.log(`Applying ${this.props.masks.length} masks.`);
 
     var ctx = this.getContext();
     for (var i = 0; i < this.props.masks.length; i++) {
       var here = this.props.masks[i];
       var selection = { x:here.x, y:here.y, w:here.w, h:here.h };
-      console.log(`Mask #${i}: ${here.type} at ${selection.x},${selection.y},${selection.w},${selection.h}`);
       switch (here.type) {
         case "shiftrgb":
           new ShiftRgbMask().applyMask(ctx, selection);
@@ -94,7 +94,7 @@ class Canvas extends Component {
           new Q0Mask().applyMask(ctx, selection);
           break;
         default:
-          console.log("Unknown mask type");
+          console.log(`Unknown mask type ${here.type}`);
           break;
       }
     }
