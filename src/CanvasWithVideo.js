@@ -30,7 +30,7 @@ class CanvasWithVideo extends Component {
           height={this.props.height}
           masks={this.props.masks}
           ref={(me) => { this.canvas = me; }}
-        />;
+        />
         {this.renderVideo()}
       </div>
     );
