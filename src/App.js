@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import Toolbar from './Toolbar.js';
-import CanvasSet from './CanvasSet.js';
-import UndoList from './UndoList.js';
-import FullScreenDropZone from './FullScreenDropZone.js';
+import Toolbar from './Toolbar';
+import CanvasSet from './CanvasSet';
+import UndoList from './UndoList';
+import FullScreenDropZone from './FullScreenDropZone';
 
 export default class App extends React.Component {
   constructor(props) {

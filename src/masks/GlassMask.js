@@ -1,4 +1,4 @@
-import { FlipBlockVert, FlipBlockHoriz } from './Common.js';
+import { FlipBlockVert, FlipBlockHoriz } from './Common';
 
 class VertGlassMask {
   applyMask(ctx, sel) {

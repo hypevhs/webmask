@@ -1,4 +1,4 @@
-import { CopyPixel } from './Common.js';
+import { CopyPixel } from './Common';
 
 const TRANS = [12, 8, 6, 15, 9, 13, 2, 11, 1, 4, 14, 7, 0, 5, 10, 3];
 

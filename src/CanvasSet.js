@@ -1,7 +1,7 @@
 import React from 'react';
-import Canvas from './Canvas.js';
-import CanvasWithVideo from './CanvasWithVideo.js';
-import RectangleSelector from './RectangleSelector.js';
+import Canvas from './Canvas';
+import CanvasWithVideo from './CanvasWithVideo';
+import RectangleSelector from './RectangleSelector';
 import './CanvasSet.css';
 
 export default class CanvasSet extends React.Component {

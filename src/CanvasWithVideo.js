@@ -1,5 +1,5 @@
 import React from 'react';
-import Canvas from './Canvas.js';
+import Canvas from './Canvas';
 
 export default class CanvasWithVideo extends React.Component {
   constructor(props) {

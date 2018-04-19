@@ -1,4 +1,4 @@
-import { FlipVert, FlipHoriz } from './Common.js';
+import { FlipVert, FlipHoriz } from './Common';
 
 class FlipVertMask {
   applyMask(ctx, sel) {

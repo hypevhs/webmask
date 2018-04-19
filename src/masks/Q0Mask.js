@@ -1,5 +1,5 @@
-import { VertGlassMask, HorizGlassMask } from './GlassMask.js';
-import InvertMask from './InvertMask.js';
+import { VertGlassMask, HorizGlassMask } from './GlassMask';
+import InvertMask from './InvertMask';
 
 export default class Q0Mask {
   applyMask(ctx, sel) {

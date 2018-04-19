@@ -1,6 +1,6 @@
 import React from 'react';
 import './Toolbar.css'
-import MaskButton from './MaskButton.js';
+import MaskButton from './MaskButton';
 import ImageShiftRGB from './buttons/shiftrgb.svg';
 import ImageXOR from './buttons/xor.svg';
 import ImageInvert from './buttons/invert.svg';

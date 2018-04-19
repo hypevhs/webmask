@@ -1,4 +1,4 @@
-import { CopyBlock } from './Common.js';
+import { CopyBlock } from './Common';
 
 /**
  * @class FLMask

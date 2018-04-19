@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ShiftRgbMask from './masks/ShiftRgbMask.js';
-import XorMask from './masks/XorMask.js';
-import InvertMask from './masks/InvertMask.js';
-import { FlipVertMask, FlipHorizMask } from './masks/FlipMask.js';
-import { VertGlassMask, HorizGlassMask } from './masks/GlassMask.js';
-import WinMask from './masks/WinMask.js';
-import { MekoPlusMask, MekoMinusMask } from './masks/MekoMask.js';
-import FLMask from './masks/FLMask.js';
-import Q0Mask from './masks/Q0Mask.js';
+import ShiftRgbMask from './masks/ShiftRgbMask';
+import XorMask from './masks/XorMask';
+import InvertMask from './masks/InvertMask';
+import { FlipVertMask, FlipHorizMask } from './masks/FlipMask';
+import { VertGlassMask, HorizGlassMask } from './masks/GlassMask';
+import WinMask from './masks/WinMask';
+import { MekoPlusMask, MekoMinusMask } from './masks/MekoMask';
+import FLMask from './masks/FLMask';
+import Q0Mask from './masks/Q0Mask';
 
 export default class Canvas extends React.Component {
   render() {

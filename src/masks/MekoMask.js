@@ -1,4 +1,4 @@
-import { GetMekoAt } from '../resources/MekoKey.js';
+import { GetMekoAt } from '../resources/MekoKey';
 
 class MekoPlusMask {
   applyMask(ctx, sel) {
