@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Canvas from './Canvas.js';
 
-class CanvasWithVideo extends Component {
+export default class CanvasWithVideo extends React.Component {
   constructor(props) {
     super(props);
 
     // return value of requestAnimationFrame
     // let's not worry about React state.
     this.rafId = 0;
-
-    this.frameUpdate = this.frameUpdate.bind(this);
-    this.getImage = this.getImage.bind(this);
   }
 
   componentDidMount() {
@@ -46,17 +43,15 @@ class CanvasWithVideo extends Component {
     />;
   }
 
-  frameUpdate() {
+  frameUpdate = () => {
     this.rafId = requestAnimationFrame(this.frameUpdate);
     this.canvas.repaint(this.canvas.getContext());
   }
 
-  getImage() {
+  getImage = () => {
     // use a <video> element for canvas drawImage
     // it's kind of crazy that this is supported
     // if it's not mounted yet, use a placeholder
     return this.videoDom || new Image(this.props.width, this.props.height);
   }
 }
-
-export default CanvasWithVideo;

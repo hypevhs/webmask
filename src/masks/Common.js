@@ -127,15 +127,15 @@ function FlipHoriz(imageData, startX, startY, width, height) {
  * @param {boolean} invert whether to invert the RGB of this cell
  */
 function CopyBlock(src, dest, srcX, srcY, destX, destY, invert) {
-  for (var y = 0; y < 8; y++) {
-    for (var x = 0; x < 8; x++) {
-      var srcRealX  = srcX  + x;
-      var srcRealY  = srcY  + y;
-      var destRealX = destX + x;
-      var destRealY = destY + y;
+  for (let y = 0; y < 8; y++) {
+    for (let x = 0; x < 8; x++) {
+      const srcRealX  = srcX  + x;
+      const srcRealY  = srcY  + y;
+      const destRealX = destX + x;
+      const destRealY = destY + y;
 
-      var srcIdx  = (srcRealY  * src.width  + srcRealX ) * 4;
-      var destIdx = (destRealY * dest.width + destRealX) * 4;
+      const srcIdx  = (srcRealY  * src.width  + srcRealX ) * 4;
+      const destIdx = (destRealY * dest.width + destRealX) * 4;
 
       if (!invert) {
         dest.data[destIdx+0] = src.data[srcIdx+0];

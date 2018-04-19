@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Toolbar.css'
 import MaskButton from './MaskButton.js';
 import ImageShiftRGB from './buttons/shiftrgb.svg';
@@ -14,7 +14,7 @@ import ImageMekoMinus from './buttons/mekominus.svg';
 import ImageFL from './buttons/fl.svg';
 import ImageQ0 from './buttons/q0.svg';
 
-class Toolbar extends Component {
+export default class Toolbar extends React.Component {
   render() {
     return (
       <div className="toolbar">
@@ -34,5 +34,3 @@ class Toolbar extends Component {
     );
   }
 }
-
-export default Toolbar;

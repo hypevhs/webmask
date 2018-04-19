@@ -69,14 +69,14 @@ class MekoCommon {
     const table = this.getTable(cellWidth, cellHeight);
 
     // extract into source buffer
-    var srcData = ctx.getImageData(sel.x, sel.y, sel.w, sel.h);
+    const srcData = ctx.getImageData(sel.x, sel.y, sel.w, sel.h);
 
     // create empty destination buffer
-    var destData = ctx.createImageData(srcData);
+    const destData = ctx.createImageData(srcData);
 
     // srcData buffer -> magical rearrangement dictionary -> destData buffer
-    for (var y = 0; y < cellHeight; y++) {
-      for (var x = 0; x < cellWidth; x++) {
+    for (let y = 0; y < cellHeight; y++) {
+      for (let x = 0; x < cellWidth; x++) {
         const p = this.tableTransform(table, x, y);
         let srcX, srcY, dstX, dstY;
         if (doPlus) {
@@ -119,15 +119,15 @@ class MekoCommon {
    * @param {boolean} invert whether to invert the RGB of this cell
    */
   static transferCell(src, dest, srcX, srcY, destX, destY, invert) {
-    for (var y = 0; y < 16; y++) {
-      for (var x = 0; x < 16; x++) {
-        var srcRealX  = srcX  + x;
-        var srcRealY  = srcY  + y;
-        var destRealX = destX + x;
-        var destRealY = destY + y;
+    for (let y = 0; y < 16; y++) {
+      for (let x = 0; x < 16; x++) {
+        const srcRealX  = srcX  + x;
+        const srcRealY  = srcY  + y;
+        const destRealX = destX + x;
+        const destRealY = destY + y;
 
-        var srcIdx  = (srcRealY  * src.width  + srcRealX ) * 4;
-        var destIdx = (destRealY * dest.width + destRealX) * 4;
+        const srcIdx  = (srcRealY  * src.width  + srcRealX ) * 4;
+        const destIdx = (destRealY * dest.width + destRealX) * 4;
 
         if (!invert) {
           dest.data[destIdx+0] = src.data[srcIdx+0];

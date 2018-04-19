@@ -2,7 +2,7 @@ import { CopyPixel } from './Common.js';
 
 const TRANS = [12, 8, 6, 15, 9, 13, 2, 11, 1, 4, 14, 7, 0, 5, 10, 3];
 
-class WinMask {
+export default class WinMask {
   applyMask(ctx, unroundedSel) {
     // no bullshit selection sizes
     // height can be anything, but only width is rounded down to 16pxs
@@ -18,13 +18,13 @@ class WinMask {
     console.assert(sel.h % 8 === 0);
 
     ctx.save();
-    var srcData = ctx.getImageData(sel.x, sel.y, sel.w, sel.h);
-    var destData = ctx.createImageData(srcData);
+    const srcData = ctx.getImageData(sel.x, sel.y, sel.w, sel.h);
+    const destData = ctx.createImageData(srcData);
     for (let i = 0; i <= sel.w - 16; i += 16) {
       for (let j = 0; j < 16; j += 1) {
         const x = i + j;
         const newX = i + TRANS[j];
-        for (var y = 0; y < sel.h; y++) {
+        for (let y = 0; y < sel.h; y++) {
           CopyPixel(srcData, destData, x, y, newX, y);
         }
       }
@@ -33,6 +33,3 @@ class WinMask {
     ctx.restore();
   }
 }
-
-export default WinMask;
-

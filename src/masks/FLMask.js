@@ -4,27 +4,27 @@ import { CopyBlock } from './Common.js';
  * @class FLMask
  * @see https://github.com/zqad/zmask/blob/master/src/org/zkt/zmask/masks/FL.java
  */
-class FLMask {
+export default class FLMask {
   applyMask(ctx, sel) {
     ctx.save();
 
-    var width = sel.w;
-    var height = sel.h;
-    var cellWidth = width / 8;
-    var cellHeight = height / 8;
+    const width = sel.w;
+    const height = sel.h;
+    const cellWidth = width / 8;
+    const cellHeight = height / 8;
 
     // no bullshit selection sizes
     console.assert(height % 8 === 0);
     console.assert(width % 8 === 0);
 
-    var table = this.buildTable(cellWidth, cellHeight);
-    var srcData = ctx.getImageData(sel.x, sel.y, sel.w, sel.h);
-    var destData = ctx.createImageData(srcData); // create empty destination buffer
+    const table = this.buildTable(cellWidth, cellHeight);
+    const srcData = ctx.getImageData(sel.x, sel.y, sel.w, sel.h);
+    const destData = ctx.createImageData(srcData); // create empty destination buffer
 
     // srcData buffer -> magical rearrangement table -> destData buffer
-    for (var y = 0; y < cellHeight; y++) {
-      for (var x = 0; x < cellWidth; x++) {
-        var tr = this.tableTransform(table, x, y);
+    for (let y = 0; y < cellHeight; y++) {
+      for (let x = 0; x < cellWidth; x++) {
+        const tr = this.tableTransform(table, x, y);
         CopyBlock(srcData, destData, x*8, y*8, tr.x*8, tr.y*8, tr.inv);
       }
     }
@@ -45,21 +45,21 @@ class FLMask {
    * @memberof FLMask
    */
   buildTable(width, height) {
-    var dx = [ 1, 0, -1, 0 ];
-    var dy = [ 0, -1, 0, 1 ];
+    const dx = [ 1, 0, -1, 0 ];
+    const dy = [ 0, -1, 0, 1 ];
 
-    var table = Array(height).fill(0).map(y => Array(width).fill(null));
+    const table = Array(height).fill(0).map(y => Array(width).fill(null));
     console.assert(table.length === height);
     console.assert(table[0].length === width);
     console.assert(table[0][0] === null);
-    var xMap = Array(width * height).fill(null);
-    var yMap = Array(width * height).fill(null);
+    const xMap = Array(width * height).fill(null);
+    const yMap = Array(width * height).fill(null);
     console.assert(xMap.length === width*height);
     console.assert(xMap[0] === null);
     console.assert(yMap.length === width*height);
     console.assert(yMap[0] === null);
 
-    var x,y,d,i;
+    let x,y,d,i;
 
     for (x = d = i = 0, y = height - 1; i < width * height; i++) {
       xMap[i] = x;
@@ -92,11 +92,9 @@ class FLMask {
    * @memberof FLMask
    */
   tableTransform(table, x, y) {
-    var rx = table.xMap[table.table[y][x].pair];
-    var ry = table.yMap[table.table[y][x].pair];
-    var rinv = table.table[y][x].no !== table.table[y][x].pair;
+    const rx = table.xMap[table.table[y][x].pair];
+    const ry = table.yMap[table.table[y][x].pair];
+    const rinv = table.table[y][x].no !== table.table[y][x].pair;
     return { x:rx, y:ry, inv:rinv };
   }
 }
-
-export default FLMask;

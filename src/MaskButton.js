@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class MaskButton extends Component {
+export default class MaskButton extends React.Component {
   render() {
     return (
       <button onClick={this.props.onClick} className="toolbar-button" style={{
@@ -9,5 +9,3 @@ class MaskButton extends Component {
     );
   }
 }
-
-export default MaskButton;

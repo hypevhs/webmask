@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Toolbar from './Toolbar.js';
 import CanvasSet from './CanvasSet.js';
 import UndoList from './UndoList.js';
 import FullScreenDropZone from './FullScreenDropZone.js';
 
-class App extends Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -22,15 +22,10 @@ class App extends Component {
         h: 0
       }
     };
-
-    this.setImage = this.setImage.bind(this);
-    this.setSelection = this.setSelection.bind(this);
-    this.addMask = this.addMask.bind(this);
-    this.resetMasksToIdx = this.resetMasksToIdx.bind(this);
   }
 
   render() {
-    let workspace = null;
+    let workspace;
     if (!!this.state.image) {
       workspace = (
         <div className="workspace">
@@ -64,7 +59,7 @@ class App extends Component {
     );
   }
 
-  setImage(img, w, h) {
+  setImage = (img, w, h) => {
     this.setState({
       image: img,
       canvasW: w,
@@ -79,37 +74,33 @@ class App extends Component {
     });
   }
 
-  setSelection(xywh) {
+  setSelection = (xywh) => {
     this.setState({ selection: xywh });
   }
 
-  addMask(type) {
+  addMask = (type) => {
     if (this.state.selection.w === 0 || this.state.selection.h === 0) {
       return; // todo: toast(please select something first)
     }
     // append mask object to this.state.mask (an array)
-    this.setState((p) => {
-      var copy = p.masks.slice(0);
-      copy.push({
-        x: p.selection.x,
-        y: p.selection.y,
-        w: p.selection.w,
-        h: p.selection.h,
-        type: type
-      });
+    this.setState((state) => {
+      const newMasks = [
+        ...state.masks, {
+          type,
+          ...state.selection
+        }
+      ];
       return {
-        masks: copy
+        masks: newMasks
       }
     });
   }
 
-  resetMasksToIdx(idx) {
+  resetMasksToIdx = (idx) => {
     // todo: sanitize
-    this.setState((p) => {
-      var masks = p.masks.slice(0, idx);
+    this.setState((state) => {
+      const masks = state.masks.slice(0, idx);
       return { masks };
     });
   }
 }
-
-export default App;

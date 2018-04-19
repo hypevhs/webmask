@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import ShiftRgbMask from './masks/ShiftRgbMask.js';
 import XorMask from './masks/XorMask.js';
@@ -10,12 +10,7 @@ import { MekoPlusMask, MekoMinusMask } from './masks/MekoMask.js';
 import FLMask from './masks/FLMask.js';
 import Q0Mask from './masks/Q0Mask.js';
 
-class Canvas extends Component {
-  constructor(props) {
-    super(props);
-    this.repaint = this.repaint.bind(this);
-  }
-
+export default class Canvas extends React.Component {
   render() {
     return (
       <canvas
@@ -26,17 +21,17 @@ class Canvas extends Component {
   }
 
   componentDidMount() {
-    var ctx = this.getContext();
+    const ctx = this.getContext();
     this.repaint(ctx);
   }
 
   componentDidUpdate() {
-    var ctx = this.getContext();
+    const ctx = this.getContext();
     ctx.clearRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
     this.repaint(ctx);
   }
 
-  repaint(ctx) {
+  repaint = (ctx) => {
     ctx.save();
     ctx.drawImage(this.props.getImage(), 0, 0);
     this.applyMasks();
@@ -48,51 +43,31 @@ class Canvas extends Component {
       return;
     }
 
-    var ctx = this.getContext();
-    for (var i = 0; i < this.props.masks.length; i++) {
-      var here = this.props.masks[i];
-      var selection = { x:here.x, y:here.y, w:here.w, h:here.h };
-      switch (here.type) {
-        case "shiftrgb":
-          new ShiftRgbMask().applyMask(ctx, selection);
-          break;
-        case "xor":
-          new XorMask().applyMask(ctx, selection);
-          break;
-        case "invert":
-          new InvertMask().applyMask(ctx, selection);
-          break;
-        case "flipvert":
-          new FlipVertMask().applyMask(ctx, selection);
-          break;
-        case "fliphoriz":
-          new FlipHorizMask().applyMask(ctx, selection);
-          break;
-        case "vertglass":
-          new VertGlassMask().applyMask(ctx, selection);
-          break;
-        case "horizglass":
-          new HorizGlassMask().applyMask(ctx, selection);
-          break;
-        case "win":
-          new WinMask().applyMask(ctx, selection);
-          break;
-        case "mekoplus":
-          new MekoPlusMask().applyMask(ctx, selection);
-          break;
-        case "mekominus":
-          new MekoMinusMask().applyMask(ctx, selection);
-          break;
-        case "fl":
-          new FLMask().applyMask(ctx, selection);
-          break;
-        case "q0":
-          new Q0Mask().applyMask(ctx, selection);
-          break;
-        default:
-          console.log(`Unknown mask type ${here.type}`);
-          break;
+    const ctx = this.getContext();
+
+    const maskMap = {
+      shiftrgb: new ShiftRgbMask(),
+      xor: new XorMask(),
+      invert: new InvertMask(),
+      flipvert: new FlipVertMask(),
+      fliphoriz: new FlipHorizMask(),
+      vertglass: new VertGlassMask(),
+      horizglass: new HorizGlassMask(),
+      win: new WinMask(),
+      mekoplus: new MekoPlusMask(),
+      mekominus: new MekoMinusMask(),
+      fl: new FLMask(),
+      q0: new Q0Mask()
+    };
+
+    for (let theMask of this.props.masks) {
+      const maskFunc = maskMap[theMask.type];
+      if (!maskFunc) {
+        console.log(`Unknown mask type ${theMask.type}`);
+        continue;
       }
+      const selection = { x: theMask.x, y: theMask.y, w: theMask.w, h: theMask.h };
+      maskFunc.applyMask(ctx, selection);
     }
   }
 
@@ -100,5 +75,3 @@ class Canvas extends Component {
     return ReactDOM.findDOMNode(this).getContext('2d');
   }
 }
-
-export default Canvas;

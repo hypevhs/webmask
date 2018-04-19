@@ -1,39 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Dropzone from 'react-dropzone'
 
-class FullScreenDropZone extends Component {
+export default class FullScreenDropZone extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       dropzoneActive: false,
       tempVideoSrc: null
     }
-
-    this.onDragEnter = this.onDragEnter.bind(this);
-    this.onDragLeave = this.onDragLeave.bind(this);
-    this.onDrop = this.onDrop.bind(this);
-    this.onDropAccepted = this.onDropAccepted.bind(this);
   }
 
-  onDragEnter() {
+  onDragEnter = () => {
     this.setState({
       dropzoneActive: true
     });
   }
 
-  onDragLeave() {
+  onDragLeave = () => {
     this.setState({
       dropzoneActive: false
     });
   }
 
-  onDrop() {
+  onDrop = () => {
     this.setState({
       dropzoneActive: false
     });
   }
 
-  onDropAccepted(files) {
+  onDropAccepted = (files) => {
     console.log(files);
     // clear out the old src blob url, in case we switch from video to something else
     this.setState({ tempVideoSrc: null });
@@ -92,5 +87,3 @@ class FullScreenDropZone extends Component {
     );
   }
 }
-
-export default FullScreenDropZone;

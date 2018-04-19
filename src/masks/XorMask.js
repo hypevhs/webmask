@@ -1,4 +1,4 @@
-class XorMask {
+export default class XorMask {
   applyMask(ctx, sel) {
     ctx.save();
     const myImageData = ctx.getImageData(sel.x, sel.y, sel.w, sel.h);
@@ -17,5 +17,3 @@ class XorMask {
     ctx.restore();
   }
 }
-
-export default XorMask;

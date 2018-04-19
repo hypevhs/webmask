@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 /**
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
  * @extends {Component}
  * @see http://atomicrobotdesign.com/blog/javascript/draw-a-rectangle-using-the-mouse-on-the-canvas-in-less-than-40-lines-of-javascript/
  */
-class RectangleSelector extends Component {
+export default class RectangleSelector extends React.Component {
   constructor(props) {
     super(props);
 
@@ -21,12 +21,6 @@ class RectangleSelector extends Component {
       antsId: 0, // return value of requestAnimationFrame
       antsOffset: 0 // marching ants animation counter
     };
-
-    this.onMouseDown = this.onMouseDown.bind(this);
-    this.onMouseUp = this.onMouseUp.bind(this);
-    this.onMouseMove = this.onMouseMove.bind(this);
-    this.onMouseLeave = this.onMouseLeave.bind(this);
-    this.antsUpdate = this.antsUpdate.bind(this);
   }
 
   render() {
@@ -43,13 +37,13 @@ class RectangleSelector extends Component {
   }
 
   componentDidMount() {
-    var ctx = ReactDOM.findDOMNode(this).getContext('2d');
+    const ctx = ReactDOM.findDOMNode(this).getContext('2d');
     this.repaint(ctx);
     this.antsUpdate();
   }
 
   componentDidUpdate() {
-    var ctx = ReactDOM.findDOMNode(this).getContext('2d');
+    const ctx = ReactDOM.findDOMNode(this).getContext('2d');
     ctx.clearRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
     this.repaint(ctx);
   }
@@ -71,7 +65,7 @@ class RectangleSelector extends Component {
   }
 
   drawSelectionAnts(ctx) {
-    var xywh = this.getRealSelect();
+    const xywh = this.getRealSelect();
     if (xywh.w === 0 || xywh.h === 0)
       return;
     ctx.strokeStyle = "black";
@@ -84,8 +78,8 @@ class RectangleSelector extends Component {
   }
 
   drawCursor(ctx) {
-    var cellX = this.blockFloor(this.state.mouseOverX);
-    var cellY = this.blockFloor(this.state.mouseOverY);
+    const cellX = this.blockFloor(this.state.mouseOverX);
+    const cellY = this.blockFloor(this.state.mouseOverY);
 
     ctx.save();
     ctx.setLineDash([]);
@@ -94,17 +88,17 @@ class RectangleSelector extends Component {
     ctx.restore();
   }
 
-  onMouseDown(e) {
+  onMouseDown = (e) => {
     if (e.button !== 0) { return; }
-    var mouse = this.getMouseCoords(e);
+    const mouse = this.getMouseCoords(e);
     this.setState({ x1: mouse.x, y1: mouse.y, x2: mouse.x, y2: mouse.y, dragging: true });
     e.preventDefault();
   }
 
-  onMouseUp(e) {
+  onMouseUp = (e) => {
     if (e.button !== 0) { return; }
     this.setState({ dragging: false });
-    var xywh = this.getRealSelect();
+    const xywh = this.getRealSelect();
     // pass active selection range to parent
     this.props.onSelection(xywh);
     e.preventDefault();
@@ -117,22 +111,22 @@ class RectangleSelector extends Component {
     }
 
     // ensure that coords are all positive, in case of a BotRight-to-TopLeft (aka "backwards") selection
-    var x = Math.min(this.state.x1, this.state.x2);
-    var y = Math.min(this.state.y1, this.state.y2);
-    var x2 = Math.max(this.state.x1, this.state.x2);
-    var y2 = Math.max(this.state.y1, this.state.y2);
+    let x = Math.min(this.state.x1, this.state.x2);
+    let y = Math.min(this.state.y1, this.state.y2);
+    let x2 = Math.max(this.state.x1, this.state.x2);
+    let y2 = Math.max(this.state.y1, this.state.y2);
     // round to 8x8 blocks
     x = this.blockFloor(x);
     y = this.blockFloor(y);
     x2 = this.blockCeil(x2);
     y2 = this.blockCeil(y2);
-    var w = x2 - x;
-    var h = y2 - y;
-    return {x:x,y:y,w:w,h:h};
+    const w = x2 - x;
+    const h = y2 - y;
+    return { x, y, w, h };
   }
 
-  onMouseMove(e) {
-    var mouse = this.getMouseCoords(e);
+  onMouseMove = (e) => {
+    const mouse = this.getMouseCoords(e);
     if (this.state.dragging) {
       this.setState({ x2: mouse.x, y2: mouse.y, mouseOverX: mouse.x, mouseOverY: mouse.y });
     } else {
@@ -141,14 +135,14 @@ class RectangleSelector extends Component {
     e.preventDefault();
   }
 
-  onMouseLeave(e) {
+  onMouseLeave = (e) => {
     this.setState({ mouseOverX: -99, mouseOverY: -99 });
   }
 
   getMouseCoords(e) {
-    var rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
-    var localX = e.clientX - rect.left;
-    var localY = e.clientY - rect.top;
+    const rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
+    let localX = e.clientX - rect.left;
+    let localY = e.clientY - rect.top;
     localX += 0.1; // corner case where selection start is ON a 8x8 gridline, breaking the floor/ceil for backwards selections
     localY += 0.1; // FIXME: bug or feature ??
     return { x: localX, y: localY };
@@ -162,8 +156,8 @@ class RectangleSelector extends Component {
     return Math.ceil(n / 8) * 8;
   }
 
-  antsUpdate() {
-    var antsId = requestAnimationFrame(this.antsUpdate);
+  antsUpdate = () => {
+    const antsId = requestAnimationFrame(this.antsUpdate);
     this.setState((ps) => {
       return {
         antsOffset: ps.antsOffset - 1,
@@ -172,5 +166,3 @@ class RectangleSelector extends Component {
     });
   }
 }
-
-export default RectangleSelector;

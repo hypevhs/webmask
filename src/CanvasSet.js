@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Canvas from './Canvas.js';
 import CanvasWithVideo from './CanvasWithVideo.js';
 import RectangleSelector from './RectangleSelector.js';
 import './CanvasSet.css';
 
-class CanvasSet extends Component {
+export default class CanvasSet extends React.Component {
   // this.props.image can be a HTMLImageElement (aka Image()), or a URL to a video.
 
   render() {
@@ -53,5 +53,3 @@ class CanvasSet extends Component {
     }
   }
 }
-
-export default CanvasSet;

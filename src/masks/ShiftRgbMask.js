@@ -1,4 +1,4 @@
-class ShiftRgbMask {
+export default class ShiftRgbMask {
   applyMask(ctx, sel) {
     ctx.save();
     const myImageData = ctx.getImageData(sel.x, sel.y, sel.w, sel.h);
@@ -20,5 +20,3 @@ class ShiftRgbMask {
     ctx.restore();
   }
 }
-
-export default ShiftRgbMask;

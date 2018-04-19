@@ -340,14 +340,14 @@ const MekoKeyView = new DataView(MekoKeyRaw);
 // get u16int at array index (not byte offet)
 const GetMekoAt = function(entry) {
   const byteOffset = (entry * 2) % MekoKeyView.byteLength;
-  var littleEndian = false;
+  const littleEndian = false;
   return MekoKeyView.getUint16(byteOffset, littleEndian);
 }
 
 //0x20, 0x64, 0x16, 0xf2
 console.assert(GetMekoAt(0) === 0x2064);
 console.assert(GetMekoAt(1) === 0x16f2);
-var lastIdx = (MekoKeyView.byteLength / 2) - 1;
+const lastIdx = (MekoKeyView.byteLength / 2) - 1;
 console.assert(GetMekoAt(lastIdx) === 0x1700);
 console.assert(GetMekoAt(lastIdx+1) === 0x2064);
 
