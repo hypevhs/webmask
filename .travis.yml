@@ -12,6 +12,7 @@ deploy:
   region: us-east-2
   on:
     repo: libjared/webmask
+    branch: release
 script:
   - npm run test
   - npm run build
