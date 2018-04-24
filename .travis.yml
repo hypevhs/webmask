@@ -9,6 +9,7 @@ deploy:
   bucket: webmask
   skip_cleanup: true
   local_dir: build
+  region: us-east-2
   on:
     repo: libjared/webmask
 script:
