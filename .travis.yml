@@ -8,5 +8,9 @@ deploy:
     secure: sa4K68ArGGlATI3B9UhD/hO5Nb2cE0048Jqgl9N/JLP3soobsj96EWGFZ8G3J1T5Cm9FRii4T/3Jnibh0humYmIPs+pl6HDFwJMzRlfXshaiWBUWZmy56f7zJFy45bKrSUatKhlf+LpQT//PB7z9Dg8CsnPiJDwuRMXOVCZxQE8Y3FBw77Fwtb6YdNCbDt37/iwRLtLJ1rvxZMQEPx24aPKsEHl8FfRBnyQT+gp8+v6OkvrUBU6yRedfRf7XhIDdefgMTBg4cWNQsswsRJRT7a+YmiRk6dvsRCH2AY708AoXVblVTm0vV9SAlA5QIDWknXGoJbZDS4jd3S4JldJUs9f+BNfdSiszP1YehF0ilHfcWD79POax/b07T3F3pQTJaeyvMyaP0bY7bQMv5LmCaZpnf0OTpecPiSgBmTgaY72EHD6qhc0LMbo3sYrq7RptLUR6FZhZ3F3I6Xbfr3nbsfB3YAiwniaDVS3Hgz4NuR/5oxQycFIleVJQocUukSTpJN3rg4emj6VU68cw7GdIZFgBdW8CmLn8+JATxIjBzdEk/zYlzvK2B992SmGUX5ehuN87QvW4ManXCV+VpBppt3G2CK/jeltIDkTaWzP0n1zr51lw8OOaI88TpEcpy3pQUC8a57dN3wlkecxSpcEsdjSK3RWurU8UcpjI9hm8Ybw=
   bucket: webmask
   skip_cleanup: true
+  local_dir: build
   on:
     repo: libjared/webmask
+script:
+  - npm run test
+  - npm run build
