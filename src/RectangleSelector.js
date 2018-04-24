@@ -32,6 +32,7 @@ export default class RectangleSelector extends React.Component {
         onMouseUp={this.onMouseUp}
         onMouseMove={this.onMouseMove}
         onMouseLeave={this.onMouseLeave}
+        onContextMenu={this.onContextMenu}
         className="canvas-rectangle">Canvas not supported.</canvas>
     );
   }
@@ -137,6 +138,10 @@ export default class RectangleSelector extends React.Component {
 
   onMouseLeave = (e) => {
     this.setState({ mouseOverX: -99, mouseOverY: -99 });
+  }
+
+  onContextMenu = (e) => {
+    e.preventDefault();
   }
 
   getMouseCoords(e) {
