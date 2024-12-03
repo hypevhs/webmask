@@ -1,18 +1,18 @@
 import React from 'react';
 import './Toolbar.css'
 import MaskButton from './MaskButton';
-import ImageShiftRGB from './buttons/shiftrgb.svg';
-import ImageXOR from './buttons/xor.svg';
-import ImageInvert from './buttons/invert.svg';
-import ImageFlipVert from './buttons/flipvert.svg';
-import ImageFlipHoriz from './buttons/fliphoriz.svg';
-import ImageVertGlass from './buttons/vertglass.svg';
-import ImageHorizGlass from './buttons/horizglass.svg';
-import ImageWin from './buttons/win.svg';
-import ImageMekoPlus from './buttons/mekoplus.svg';
-import ImageMekoMinus from './buttons/mekominus.svg';
-import ImageFL from './buttons/fl.svg';
-import ImageQ0 from './buttons/q0.svg';
+import ImageShiftRGB from '!file-loader!./buttons/shiftrgb.svg';
+import ImageXOR from '!file-loader!./buttons/xor.svg';
+import ImageInvert from '!file-loader!./buttons/invert.svg';
+import ImageFlipVert from '!file-loader!./buttons/flipvert.svg';
+import ImageFlipHoriz from '!file-loader!./buttons/fliphoriz.svg';
+import ImageVertGlass from '!file-loader!./buttons/vertglass.svg';
+import ImageHorizGlass from '!file-loader!./buttons/horizglass.svg';
+import ImageWin from '!file-loader!./buttons/win.svg';
+import ImageMekoPlus from '!file-loader!./buttons/mekoplus.svg';
+import ImageMekoMinus from '!file-loader!./buttons/mekominus.svg';
+import ImageFL from '!file-loader!./buttons/fl.svg';
+import ImageQ0 from '!file-loader!./buttons/q0.svg';
 
 export default class Toolbar extends React.Component {
   render() {
