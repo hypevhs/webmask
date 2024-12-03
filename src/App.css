@@ -2,7 +2,7 @@ body {
   background: url('./static/stressed_linen_texture.png') repeat 0 0;
 }
 
-.app, .app > div {
+.app, .dropzone-container, .dropzone {
   /* fix dumb dropzone */
   height: 100%;
 }

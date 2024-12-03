@@ -72,7 +72,7 @@ export default class FullScreenDropZone extends React.Component {
   render() {
     return (
       <Dropzone
-        disableClick
+        noClick
         style={{}}
         accept='image/gif, image/jpeg, image/png, image/svg+xml, video/mp4'
         onDragEnter={this.onDragEnter}
@@ -80,9 +80,16 @@ export default class FullScreenDropZone extends React.Component {
         onDrop={this.onDrop}
         onDropAccepted={this.onDropAccepted}
       >
-        { this.state.tempVideoSrc && this.getTempVideo() }
-        { this.state.dropzoneActive && <div className='dropzone-overlay'>Drop image files...</div> }
-        {this.props.children}
+        {({getRootProps, getInputProps}) => (
+          <section className='dropzone-container'>
+            <div {...getRootProps({className: 'dropzone'})}>
+              <input {...getInputProps()} />
+              { this.state.tempVideoSrc && this.getTempVideo() }
+              { this.state.dropzoneActive && <div className='dropzone-overlay'>Drop image files...</div> }
+              {this.props.children}
+            </div>
+          </section>
+        )}
       </Dropzone>
     );
   }
